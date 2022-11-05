@@ -56,6 +56,7 @@ namespace LynxPyon {
             ChatGui.ChatMessage -= MainWindow.OnChatMessage;
             MainWindow.Dispose();
             CommandManager.RemoveHandler(CommandName);
+            CommandManager.RemoveHandler(AltCommandName);
             XIVCommon.Dispose();
         }
 
