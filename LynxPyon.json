@@ -1,0 +1,23 @@
+[{
+	"Author": "Pyon",
+	"Name": "LynxPyon",
+	"Punchline": "Helper plugin for activities hosted by Emerlad Lynx",
+	"Description": "An interface for managing gambling games & other things.",
+	"Changelog": "",
+	"InternalName": "LynxPyon",
+	"AssemblyVersion": "1.0.0.0",
+	"RepoUrl": "https://github.com/priprii/FFXIVLynxPyon",
+	"ApplicableVersion": "any",
+	"CategoryTags": [ "minigames" ],
+	"Tags": [ "blackjack", "gamble", "pyon", "emerald", "lynx", "maid", "lounge" ],
+	"DalamudApiLevel": 7,
+	"IconUrl": "",
+	"ImageUrls": [ "" ],
+	"DownloadLinkInstall": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
+	"IsHide": false,
+	"IsTestingExclusive": false,
+	"DownloadLinkTesting": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
+	"DownloadLinkUpdate": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
+	"DownloadCount": 0,
+	"LastUpdated": "1667651516"
+}]
