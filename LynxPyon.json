@@ -5,7 +5,7 @@
 	"Description": "An interface for managing gambling games & other things.",
 	"Changelog": "",
 	"InternalName": "LynxPyon",
-	"AssemblyVersion": "1.0.0.0",
+	"AssemblyVersion": "1.0.0.1",
 	"RepoUrl": "https://github.com/priprii/FFXIVLynxPyon",
 	"ApplicableVersion": "any",
 	"CategoryTags": [ "minigames" ],

@@ -100,10 +100,16 @@ namespace LynxPyon {
             }
             players.RemoveAll(player => player.Name == "");
 
+            bool isChanged = false;
             foreach(Player nearbyPlayer in nearbyPlayers) {
                 if(players.Find(x => x.ID == nearbyPlayer.ID) == null) {
                     players.Add(nearbyPlayer);
+                    isChanged = true;
                 }
+            }
+
+            if(isChanged) {
+                players.Sort((x, y) => x.Name.CompareTo(y.Name));
             }
         }
 
