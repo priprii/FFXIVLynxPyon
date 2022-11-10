@@ -26,7 +26,7 @@ namespace LynxPyon {
 
         public static XivCommonBase XIVCommon;
 
-        public unsafe LynxPyon() {
+        public LynxPyon() {
             CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand) {
                 HelpMessage = "Open plugin window."
             });
