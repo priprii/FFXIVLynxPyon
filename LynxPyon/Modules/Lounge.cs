@@ -60,8 +60,8 @@ namespace LynxPyon.Modules {
             if(string.IsNullOrWhiteSpace(message)) { return ""; }
 
             return message.Replace("#customer#", order.Customer?.Name)
-                .Replace("#firstname#", order.Customer?.GetName(NameMode.First))
-                .Replace("#lastname#", order.Customer?.GetName(NameMode.Last))
+                .Replace("#firstname#", order.Customer?.GetAlias(NameMode.First))
+                .Replace("#lastname#", order.Customer?.GetAlias(NameMode.Last))
                 .Replace("#items#", order.GetItems())
                 .Replace("#totalcost#", order.GetTotalCost().ToString("N0"));
         }

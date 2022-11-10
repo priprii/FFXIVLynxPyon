@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Dalamud.Interface;
 using Dalamud.Interface.Colors;
+using Dalamud.Logging;
 using ImGuiNET;
 using LynxPyon.Extensions;
 using LynxPyon.Models;
@@ -44,8 +45,8 @@ namespace LynxPyon.Modules {
 
         public void Initialize() {
             Dealer = new Player(0);
-            Dealer.Name = LynxPyon.ClientState.LocalPlayer?.Name.TextValue ?? "";
-            Dealer.Alias = Dealer.GetName(Config.AutoNameMode);
+            Dealer.Name = Dealer.GetNameFromDisplayType(LynxPyon.ClientState.LocalPlayer?.Name.TextValue ?? "");
+            Dealer.Alias = Dealer.GetAlias(LynxPyon.ClientState.LocalPlayer?.Name.TextValue ?? "", Config.AutoNameMode);
             InitializePlayers();
         }
 
@@ -80,8 +81,8 @@ namespace LynxPyon.Modules {
 
             return message.Replace("#dealer#", player.Alias)
                 .Replace("#player#", player.Alias)
-                .Replace("#firstname#", player.GetName(NameMode.First))
-                .Replace("#lastname#", player.GetName(NameMode.Last))
+                .Replace("#firstname#", player.GetAlias(NameMode.First))
+                .Replace("#lastname#", player.GetAlias(NameMode.Last))
                 .Replace("#bet#", player.Bet.ToString("N0"))
                 .Replace("#cards#", player.Blackjack.GetCards())
                 .Replace("#value#", player.Blackjack.AceLowValue != 0 ? (player.Blackjack.AceHighValue < 21 ? $"{player.Blackjack.AceLowValue}/{player.Blackjack.AceHighValue}" : player.Blackjack.AceHighValue == 21 ? $"{player.Blackjack.AceHighValue}" : $"{player.Blackjack.AceLowValue}") : player.Blackjack.GetStrValue())
@@ -192,7 +193,9 @@ namespace LynxPyon.Modules {
                         }
                     }
                 }
-            } catch { }
+            } catch(Exception ex) {
+                PluginLog.Warning($"Error while parsing Chat Message: {ex}");
+            }
         }
 
         private int GetStandValue() {
@@ -291,9 +294,8 @@ namespace LynxPyon.Modules {
             ImGui.Checkbox("Enabled", ref Enabled);
             if(ImGui.IsItemHovered()) { ImGui.SetTooltip("Must first enable this option for the plugin to function.\nShould disable it while not doing a blackjack round to prevent unnecessary dice roll & object monitoring."); }
             ImGui.NextColumn();
-            ImGui.TextColored(ImGuiColors.DalamudGrey, "Dealer Name:");
-            ImGui.SameLine();
-            ImGui.InputText($"###dealerName", ref Dealer.Name, 255);
+            Dealer.Name = Dealer.GetNameFromDisplayType(LynxPyon.ClientState.LocalPlayer?.Name.TextValue ?? "");
+            ImGui.TextColored(ImGuiColors.DalamudGrey, $"Dealer Name: {Dealer.Name}");
             if(ImGui.IsItemHovered()) { ImGui.SetTooltip("This is you! ..Or at least it should be.\nI dunno what would happen if it's not."); }
 
             ImGui.Columns(9);
@@ -849,7 +851,7 @@ namespace LynxPyon.Modules {
             ImGui.Separator();
             ImGui.TextColored(ImGuiColors.DalamudGrey, "How to be a Cute Dealer in 10 Easy Steps!");
             ImGui.Separator();
-            ImGui.TextWrapped("1. When ready, you can start a round by pressing the 'B' button in Dealer  Bet , this will send a message informing players that the round is starting & they'll need to place bets.");
+            ImGui.TextWrapped("1. When ready, be sure to let players know the rules you're playing with, you can start a round by pressing the 'B' button in Dealer  Bet , this will send a message informing players that the round is starting & they'll need to place bets.");
             ImGui.Separator();
             ImGui.TextWrapped("2. Trade each player for their bet amount & manually add it to their 'Bet Amount' field, press the 'B' button in Player  Bet  to announce their bet amount.");
             ImGui.Separator();

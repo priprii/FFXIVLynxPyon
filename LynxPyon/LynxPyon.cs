@@ -18,7 +18,6 @@ namespace LynxPyon {
         [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
         [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
         [PluginService] public static ClientState ClientState { get; private set; } = null!;
-        [PluginService] public static Framework Framework { get; private set; } = null!;
         [PluginService] public static ObjectTable Objects { get; private set; } = null!;
         [PluginService] public static SigScanner SigScanner { get; private set; } = null!;
 
@@ -27,7 +26,7 @@ namespace LynxPyon {
 
         public static XivCommonBase XIVCommon;
 
-        public LynxPyon() {
+        public unsafe LynxPyon() {
             CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand) {
                 HelpMessage = "Open plugin window."
             });

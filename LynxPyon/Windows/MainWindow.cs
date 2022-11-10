@@ -2,6 +2,7 @@
 using System.Numerics;
 using Dalamud.Game.Text;
 using Dalamud.Interface;
+using Dalamud.Interface.Colors;
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
 using LynxPyon.Extensions;
@@ -123,7 +124,7 @@ namespace LynxPyon {
                         PlayerManager = new PlayerManager();
                     }
 
-                    PlayerManager.UpdateParty(ref Blackjack.Players, Blackjack.Dealer, Config.AutoNameMode);
+                    PlayerManager.UpdateParty(ref Blackjack.Players, LynxPyon.ClientState.LocalPlayer.Name.TextValue, Config.AutoNameMode);
                 }
             }
 
@@ -241,17 +242,19 @@ namespace LynxPyon {
         }
 
         private void DrawAbout() {
-            ImGui.Text("This plugin is developed by Primu Pyon@Omega");
-            ImGui.Text("Intended for exclusive use by staff working for Emerald Lynx");
+            ImGui.TextColored(ImGuiColors.DalamudGrey, "About");
+            ImGui.TextWrapped("This plugin is developed by Primu Pyon@Omega");
+            ImGui.TextWrapped("Intended for exclusive use by staff working for Emerald Lynx");
+            ImGui.Separator();
+            ImGui.TextWrapped("If you'd like to support me, send me a gift :3");
 
             ImGui.Separator();
-
-            ImGui.Text("If you'd like to support me, send me a gift :3");
+            ImGui.TextColored(ImGuiColors.DalamudGrey, "Change Log");
+            ImGui.TextWrapped("1.0.0.4 ~ 2022.11.10\n- Added this change log!\n- Implemented automatic way of handling Blackjack dealer name, so different name display types are now properly supported.");
 
             ImGui.Columns(1);
             ImGui.Separator();
             ImGuiHelpers.ScaledDummy(5);
-
             if(ImGui.Button("Close")) {
                 IsOpen = false;
             }

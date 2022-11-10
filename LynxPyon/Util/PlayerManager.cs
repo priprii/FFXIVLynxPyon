@@ -113,7 +113,7 @@ namespace LynxPyon {
             }
         }
 
-        public void UpdateParty(ref List<Player> players, Player dealer, NameMode nameMode) {
+        public void UpdateParty(ref List<Player> players, string dealerName, NameMode nameMode) {
             List<Player> partyMembers = new List<Player>();
 
             for(int i = 0; i < 200; i += 2) {
@@ -123,9 +123,9 @@ namespace LynxPyon {
                 }
 
                 uint playerId = player.ObjectId;
-                if(FindGroupMemberById(playerId) != null && player.Name.TextValue != dealer.Name) {
+                if(FindGroupMemberById(playerId) != null && player.Name.TextValue != dealerName) {
                     Player newPlayer = new Player((int)playerId, player.Name.TextValue);
-                    newPlayer.Alias = newPlayer.GetName(nameMode);
+                    newPlayer.Alias = newPlayer.GetAlias(nameMode);
                     partyMembers.Add(newPlayer);
                 }
             }

@@ -94,7 +94,7 @@ namespace LynxPyon {
                 string job = match.Groups[1].Value.Trim();
                 string name = match.Groups[2].Value.Trim();
 
-                if(!name.ToLower().Contains("for hire") && !name.ToLower().Contains("comming soon")) {
+                if(!name.ToLower().Contains("for hire") && !name.ToLower().Contains("hiring") && !name.ToLower().Contains("comming soon")) {
                     staff.Add(new Staff(name, job));
                 }
             }
