@@ -250,7 +250,19 @@ namespace LynxPyon {
 
             ImGui.Separator();
             ImGui.TextColored(ImGuiColors.DalamudGrey, "Change Log");
-            ImGui.TextWrapped("1.0.0.4 ~ 2022.11.10\n- Added this change log!\n- Implemented automatic way of handling Blackjack dealer name, so different name display types are now properly supported.");
+            ImGui.TextWrapped("1.0.0.5 ~ 2022.11.14\n" +
+                "- Added rules messages that can be customized & output.\n" +
+                "- Fixed profit values, they'll now only display the actual gain/loss.\n" +
+                "- Added splitting option when player's first 2 cards are a pair, can be toggled with the 'Allow Split' option in config. This required a lot of code restructuring so there might be bugs, probably not though!! Some hard-coded rules for splitting: Split hand with natural blackjack is treated as a normal win, split hand cannot be split again & bet from split hands cannot be pushed.\n" +
+                "- The above also means there are more message fields specific to splitting.\n" +
+                "- Changed cards/value input fields to readonly as you can't modify them manually anyway.\n" +
+                "- Also changed the Bet Amount field to readonly when appropriate.\n" +
+                "- With the above change, removed the 'auto double' option as it's not necessary, bet is always automatically calculated for double/split functions.\n" +
+                "- Fixed some minor errors.");
+
+            ImGui.TextWrapped("1.0.0.4 ~ 2022.11.10\n" +
+                "- Added this change log!\n" +
+                "- Implemented automatic way of handling Blackjack dealer name, so different name display types are now properly supported.");
 
             ImGui.Columns(1);
             ImGui.Separator();

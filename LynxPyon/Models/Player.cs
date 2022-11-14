@@ -6,10 +6,11 @@ namespace LynxPyon.Models {
         public int ID;
         public string Name = "";
         public string Alias = "";
-        public int Bet = 0;
+        public int TotalBet = 0;
+        public int BetPerHand = 0;
         public int Winnings = 0;
         public int TotalWinnings = 0;
-        
+
         public BlackjackProps Blackjack = new BlackjackProps();
 
         private enum ChatNameDisplayTypes { FullName, SurnameAbbrv, ForenameAbbrv, Initials }
@@ -56,16 +57,28 @@ namespace LynxPyon.Models {
             return name;
         }
 
+        public void UpdateTotalBet() {
+            TotalBet = 0;
+            foreach(Hand hand in Blackjack.Hands) {
+                TotalBet += hand.Doubled ? BetPerHand * 2 : BetPerHand;
+            }
+        }
+
         public void Reset() {
-            Bet = Blackjack.Pushed ? Bet : 0;
+            TotalBet = Blackjack.Pushed ? TotalBet : 0;
+            BetPerHand = TotalBet;
             Winnings = 0;
-            Blackjack.AceLowValue = 0;
-            Blackjack.AceHighValue = 0;
-            Blackjack.Doubled = false;
-            Blackjack.DoubleHit = false;
             Blackjack.IsPush = Blackjack.Pushed;
             Blackjack.Pushed = false;
-            Blackjack.Cards = new List<Card>();
+            Blackjack.Hands[0].AceLowValue = 0;
+            Blackjack.Hands[0].AceHighValue = 0;
+            Blackjack.Hands[0].Doubled = false;
+            Blackjack.Hands[0].DoubleHit = false;
+            Blackjack.Hands[0].Cards = new List<Card>();
+
+            if(Blackjack.Hands.Count > 1) {
+                Blackjack.Hands.RemoveAt(1);
+            }
         }
     }
 }

@@ -1,51 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LynxPyon.Models {
     public class BlackjackProps {
-        public int AceLowValue = 0;
-        public int AceHighValue = 0;
-        public bool Doubled = false;
-        public bool DoubleHit = false;
+        public List<Hand> Hands = new List<Hand>() { new Hand() };
         public bool Pushed = false;
         public bool IsPush = false;
-        public List<Card> Cards = new List<Card>();
 
         public string GetCards() {
-            string cards = "";
-            foreach(Card card in Cards) {
-                cards += $"{card.Text} ";
-            }
-
-            return cards.Trim();
+            return string.Join(" & ", Hands.Select(h => h.GetCards()).ToArray());
         }
 
-        public string GetStrValue() {
-            int value = 0;
-            AceLowValue = 0;
-            AceHighValue = 0;
-
-            foreach(Card card in Cards) {
-                if(!card.Ace) { value += card.Value; }
-            }
-
-            List<Card> aces = Cards.FindAll(x => x.Ace);
-            if(aces != null && aces.Count > 0) {
-                if(value + 10 + aces.Count > 21) {
-                    return $"{value + aces.Count}";
-                } else {
-                    AceLowValue = value + aces.Count;
-                    AceHighValue = value + 10 + aces.Count;
-                    return $"{value + 10 + aces.Count}";
-                }
-            }
-
-            return $"{value}";
-        }
-
-        public int GetIntValue() {
-            string value = GetStrValue();
-
-            return AceHighValue != 0 ? AceHighValue : int.Parse(value);
+        public string GetValues() {
+            return string.Join(" & ", Hands.Select(h => h.AceLowValue != 0 ? (h.AceHighValue < 21 ? $"{h.AceLowValue}/{h.AceHighValue}" : h.AceHighValue == 21 ? $"{h.AceHighValue}" : $"{h.AceLowValue}") : h.GetStrValue()).ToArray());
         }
     }
 }
