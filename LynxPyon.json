@@ -5,12 +5,12 @@
 	"Description": "An interface for managing gambling games & other things.",
 	"Changelog": "",
 	"InternalName": "LynxPyon",
-	"AssemblyVersion": "1.0.0.5",
+	"AssemblyVersion": "1.0.0.6",
 	"RepoUrl": "https://github.com/priprii/FFXIVLynxPyon",
 	"ApplicableVersion": "any",
 	"CategoryTags": [ "minigames" ],
 	"Tags": [ "blackjack", "gamble", "pyon", "emerald", "lynx", "maid", "lounge" ],
-	"DalamudApiLevel": 7,
+	"DalamudApiLevel": 8,
 	"IconUrl": "",
 	"ImageUrls": [ "" ],
 	"DownloadLinkInstall": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
@@ -18,6 +18,5 @@
 	"IsTestingExclusive": false,
 	"DownloadLinkTesting": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
 	"DownloadLinkUpdate": "https://github.com/priprii/FFXIVLynxPyon/raw/main/bin/LynxPyon.zip",
-	"DownloadCount": 0,
-	"LastUpdated": "1668389634"
+	"DownloadCount": 0
 }]
